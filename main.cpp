@@ -121,23 +121,23 @@ public:
     }
 
     // Downcasting using dynamic_cast
-    Telefon* convertToTelefon(Produs* produs) {
-        return dynamic_cast<Telefon*>(produs);
-    }
-
-    Computer* convertToComputer(Produs* produs) {
-        return dynamic_cast<Computer*>(produs);
-    }
-
-    Gadget* convertToGadget(Produs* produs) {
-        return dynamic_cast<Gadget*>(produs);
-    }
-
-    ~CosCumparaturi() {
-        for (auto produs : produse) {
-            delete produs;
-        }
-    }
+//    Telefon* convertToTelefon(Produs* produs) {
+//        return dynamic_cast<Telefon*>(produs);
+//    }
+//
+//    Computer* convertToComputer(Produs* produs) {
+//        return dynamic_cast<Computer*>(produs);
+//    }
+//
+//    Gadget* convertToGadget(Produs* produs) {
+//        return dynamic_cast<Gadget*>(produs);
+//    }
+//
+//    ~CosCumparaturi() {
+//        for (auto produs : produse) {
+//            delete produs;
+//        }
+//    }
 
     void golesteCos() {
         produse.clear();
