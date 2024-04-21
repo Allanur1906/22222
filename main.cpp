@@ -42,9 +42,9 @@ public:
         return nume;
     }
 
-    static int getTotalProduse() { // Static function to get the total number of products
-        return totalProduse;
-    }
+//    static int getTotalProduse() { // Static function to get the total number of products
+//        return totalProduse;
+//    }
 
     friend std::ostream& operator<<(std::ostream& os, const Produs& produs) {
         os << "Nume: " << produs.nume << ", Pret: " << produs.pret;
@@ -66,9 +66,9 @@ public:
         return pret * 1;
     }
 
-    const std::string& getModel() const {
-        return model;
-    }
+//    const std::string& getModel() const {
+//        return model;
+//    }
 
     friend std::ostream& operator<<(std::ostream& os, const Telefon& telefon) {
         os << static_cast<const Produs&>(telefon) << ", Model: " << telefon.model;
@@ -88,9 +88,9 @@ public:
         return pret * 1;
     }
 
-    const std::string& getProcesor() const {
-        return procesor;
-    }
+//    const std::string& getProcesor() const {
+//        return procesor;
+//    }
 
     friend std::ostream& operator<<(std::ostream& os, const Computer& computer) {
         os << static_cast<const Produs&>(computer) << ", Procesor: " << computer.procesor;
@@ -124,13 +124,17 @@ public:
         return total;
     }
 
+
     void afiseazaCos() const {
         std::cout << "Cosul de cumparaturi contine urmatoarele produse:" << std::endl;
-        for (const auto& produs : produse) {
+        for (const auto* produs : produse) {
             std::cout << *produs << std::endl;
         }
         std::cout << "Total: " << calculeazaTotal() << std::endl;
     }
+
+
+
 
     ~CosCumparaturi() {
         for (auto produs : produse) {
@@ -187,17 +191,17 @@ public:
     }
 
     // Downcasting using dynamic_cast
-    Telefon* convertToTelefon(Produs* produs) {
-        return dynamic_cast<Telefon*>(produs);
-    }
-
-    Computer* convertToComputer(Produs* produs) {
-        return dynamic_cast<Computer*>(produs);
-    }
-
-    Gadget* convertToGadget(Produs* produs) {
-        return dynamic_cast<Gadget*>(produs);
-    }
+//    Telefon* convertToTelefon(Produs* produs) {
+//        return dynamic_cast<Telefon*>(produs);
+//    }
+//
+//    Computer* convertToComputer(Produs* produs) {
+//        return dynamic_cast<Computer*>(produs);
+//    }
+//
+//    Gadget* convertToGadget(Produs* produs) {
+//        return dynamic_cast<Gadget*>(produs);
+//    }
 };
 
 void umpleInventar(Magazin& magazin) {
