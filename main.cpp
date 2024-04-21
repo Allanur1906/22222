@@ -260,4 +260,4 @@ int main() {
     } while (optiune != 0);
 
     return 0;
-}//
+}
