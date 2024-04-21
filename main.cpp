@@ -106,7 +106,7 @@ public:
 
     double calculeazaTotal() const {
         double total = 0;
-        for (const auto& produs : produse) {
+        for (const auto* produs : produse) { // Corrected loop variable declaration
             total += produs->getPrice();
         }
         return total;
@@ -114,14 +114,14 @@ public:
 
     void afiseazaCos() const {
         std::cout << "Cosul de cumparaturi contine urmatoarele produse:" << std::endl;
-        for (const auto& produs : produse) {
+        for (const auto* produs : produse) { // Corrected loop variable declaration
             std::cout << *produs << std::endl;
         }
         std::cout << "Total: " << calculeazaTotal() << std::endl;
     }
 
     ~CosCumparaturi() {
-        for (auto produs : produse) {
+        for (auto* produs : produse) { // Corrected loop variable declaration
             delete produs;
         }
     }
@@ -142,13 +142,13 @@ public:
 
     void afiseazaInventar() const {
         std::cout << "Inventarul contine urmatoarele produse:" << std::endl;
-        for (const auto& produs : inventar) {
+        for (const auto* produs : inventar) { // Corrected loop variable declaration
             std::cout << *produs << std::endl;
         }
     }
 
     Produs* getProdusDupaNume(const std::string& nume) {
-        for (const auto& produs : inventar) {
+        for (auto* produs : inventar) { // Corrected loop variable declaration
             if (produs->getName() == nume) {
                 return produs;
             }
@@ -159,7 +159,7 @@ public:
     Produs* recommendProduct() {
         Produs* max_price_produs = nullptr;
         double max_price = 0;
-        for (const auto& produs : inventar) {
+        for (const auto* produs : inventar) { // Corrected loop variable declaration
             if (produs->getPrice() > max_price) {
                 max_price = produs->getPrice();
                 max_price_produs = produs;
@@ -169,7 +169,7 @@ public:
     }
 
     ~Magazin() {
-        for (auto produs : inventar) {
+        for (auto* produs : inventar) { // Corrected loop variable declaration
             delete produs;
         }
     }
