@@ -23,10 +23,10 @@ protected:
     static int totalProduse;
 
 public:
-    Produs(std::string  nume, double pret) : nume(std::move(nume)), pret(pret) { totalProduse++; }
+    Produs(std::string nume, double pret) : nume(std::move(nume)), pret(pret) { totalProduse++; }
     Produs(const Produs& other) : nume(other.nume), pret(other.pret) { totalProduse++; }
     Produs& operator=(const Produs& other) {
-        if (this!= &other) {
+        if (this != &other) {
             nume = other.nume;
             pret = other.pret;
         }
@@ -42,10 +42,6 @@ public:
         return nume;
     }
 
-//    static int getTotalProduse() { // Static function to get the total number of products
-//        return totalProduse;
-//    }
-
     friend std::ostream& operator<<(std::ostream& os, const Produs& produs) {
         os << "Nume: " << produs.nume << ", Pret: " << produs.pret;
         return os;
@@ -59,16 +55,12 @@ private:
     std::string model;
 
 public:
-    Telefon(const std::string& nume, double pret, std::string  model)
+    Telefon(const std::string& nume, double pret, std::string model)
             : Produs(nume, pret), model(std::move(model)) {}
 
     [[nodiscard]] double getPrice() const override {
         return pret * 1;
     }
-
-//    const std::string& getModel() const {
-//        return model;
-//    }
 
     friend std::ostream& operator<<(std::ostream& os, const Telefon& telefon) {
         os << static_cast<const Produs&>(telefon) << ", Model: " << telefon.model;
@@ -87,10 +79,6 @@ public:
     double getPrice() const override {
         return pret * 1;
     }
-
-//    const std::string& getProcesor() const {
-//        return procesor;
-//    }
 
     friend std::ostream& operator<<(std::ostream& os, const Computer& computer) {
         os << static_cast<const Produs&>(computer) << ", Procesor: " << computer.procesor;
@@ -124,17 +112,26 @@ public:
         return total;
     }
 
-
     void afiseazaCos() const {
         std::cout << "Cosul de cumparaturi contine urmatoarele produse:" << std::endl;
-        for (const auto* produs : produse) {
+        for (const auto& produs : produse) {
             std::cout << *produs << std::endl;
         }
         std::cout << "Total: " << calculeazaTotal() << std::endl;
     }
 
+    // Downcasting using dynamic_cast
+    Telefon* convertToTelefon(Produs* produs) {
+        return dynamic_cast<Telefon*>(produs);
+    }
 
+    Computer* convertToComputer(Produs* produs) {
+        return dynamic_cast<Computer*>(produs);
+    }
 
+    Gadget* convertToGadget(Produs* produs) {
+        return dynamic_cast<Gadget*>(produs);
+    }
 
     ~CosCumparaturi() {
         for (auto produs : produse) {
@@ -189,19 +186,6 @@ public:
             delete produs;
         }
     }
-
-    // Downcasting using dynamic_cast
-//    Telefon* convertToTelefon(Produs* produs) {
-//        return dynamic_cast<Telefon*>(produs);
-//    }
-//
-//    Computer* convertToComputer(Produs* produs) {
-//        return dynamic_cast<Computer*>(produs);
-//    }
-//
-//    Gadget* convertToGadget(Produs* produs) {
-//        return dynamic_cast<Gadget*>(produs);
-//    }
 };
 
 void umpleInventar(Magazin& magazin) {
@@ -244,10 +228,10 @@ int main() {
                 std::cout << "Introduceti numele produsului: ";
                 std::cin >> nume;
                 try {
-                    Produs *produs = magazin.getProdusDupaNume(nume); // Using exception handling
+                    Produs* produs = magazin.getProdusDupaNume(nume); // Using exception handling
                     std::cout << "Produs adaugat in cos: " << *produs << std::endl;
                     cos.adaugaProdus(produs);
-                } catch (const MyException &e) { // Using custom exception class
+                } catch (const MyException& e) { // Using custom exception class
                     std::cout << e.what() << std::endl;
                 }
                 break;
@@ -263,7 +247,7 @@ int main() {
                 cos.golesteCos();
                 break;
             case 6: {
-                Produs *produs = magazin.recommendProduct();
+                Produs* produs = magazin.recommendProduct();
                 std::cout << "Produsul recomandat este: " << *produs << std::endl;
                 break;
             }
@@ -272,9 +256,9 @@ int main() {
                 std::cout << "Introduceti numele produsului de cautat: ";
                 std::cin >> numeProdus;
                 try {
-                    Produs *produs = magazin.getProdusDupaNume(numeProdus); // Using exception handling
+                    Produs* produs = magazin.getProdusDupaNume(numeProdus); // Using exception handling
                     std::cout << "Produs gasit: " << *produs << std::endl;
-                } catch (const MyException &e) { // Using custom exception class
+                } catch (const MyException& e) { // Using custom exception class
                     std::cout << e.what() << std::endl;
                 }
                 break;
@@ -290,4 +274,3 @@ int main() {
 
     return 0;
 }
-////pls
