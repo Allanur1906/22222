@@ -42,8 +42,12 @@ public:
         return nume;
     }
 
+    virtual void afisare(std::ostream& os) const {
+        os << "Nume: " << nume << ", Pret: " << pret;
+    }
+
     friend std::ostream& operator<<(std::ostream& os, const Produs& produs) {
-        os << "Nume: " << produs.nume << ", Pret: " << produs.pret;
+        produs.afisare(os);
         return os;
     }
 };
@@ -62,9 +66,9 @@ public:
         return pret * 1;
     }
 
-    friend std::ostream& operator<<(std::ostream& os, const Telefon& telefon) {
-        os << static_cast<const Produs&>(telefon) << ", Model: " << telefon.model;
-        return os;
+    void afisare(std::ostream& out) const override {
+        Produs::afisare(out);
+        out << "Model: "  << model << std::endl;
     }
 };
 
